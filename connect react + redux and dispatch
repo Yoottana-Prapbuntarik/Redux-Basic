@@ -1,0 +1,74 @@
+import React, { Component } from 'react';
+import './App.css';
+import User from './User';
+import {connect} from 'react-redux';
+class App extends Component {
+  constructor(props){
+    super(props);
+  this.state ={
+    _name :'null',
+    _age : 0
+  }
+}
+HanedleChangeData(e){
+  this.setState({
+    _name : e.target.value
+
+  })
+}
+HanedleChangeDataAge(e){
+  this.setState({
+    _age : e.target.value
+  })
+}
+onClickButtonChange(){
+  if(this.HanedleChangeData){
+this.props.setName(this.state._name);
+  }
+  if(this.HanedleChangeDataAge){
+this.props.setAge(this.state._age);
+}
+}
+  render() {
+    return (
+      <div className="App">
+        <User username = {this.props.user.name} age = {this.props.user.age}/>
+        {this.state._name}<br/>
+        {this.state._age}<br/>
+        <input type="text" placeholder="name" onChange={this.HanedleChangeData.bind(this)}/>
+        <br/>
+        <input type="number" placeholder="age" onChange={this.HanedleChangeDataAge.bind(this)}/>
+        <br/>
+        <button style={{marginTop:10}} onClick={this.onClickButtonChange.bind(this) }>ChangeName</button>
+      </div>
+    );
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    //from reducer  user and emp make name reducer
+    user: state.user,
+    emp: state.emp
+
+  };
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName:(name)=>{
+      dispatch({
+        type:"setName",
+        payload:name
+      });
+    },
+    setAge:(age)=>{
+      dispatch({
+        type:"setAge",
+        payload:age
+      })
+    }
+
+  };
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
