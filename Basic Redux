@@ -27,7 +27,7 @@ const Employeereducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD":
             // state = {
-            // // state   เข้าถึงอากิวเม้น ระบุ state
+            // state :  อากิวเม้นฟังก์ชัน.ระบุ state
             // salary:state.salary
             // value:state.value
             // }
